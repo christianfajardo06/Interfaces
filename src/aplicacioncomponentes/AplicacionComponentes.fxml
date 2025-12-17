@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import barraprogreso.BarraProgreso?>
+<?import checkbutton.CheckButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import joseboton.Joseboton?>
+<?import radialbuttoncustom.RadialButtonCustom?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacioncomponentes.AplicacionComponentesController">
+    <children>
+        <Label layoutX="180.0" layoutY="20.0" text="Configurador de Perfil de Usuario" textFill="#2c3e50">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+      
+        <Separator layoutX="50.0" layoutY="65.0" prefWidth="600.0" />
+      
+        <VBox layoutX="50.0" layoutY="90.0" spacing="15.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+            <children>
+                <Label text="Preferencias Generales" textFill="#34495e">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+            
+                <CheckButton fx:id="checkNotificaciones" text="Activar Notificaciones" />
+            
+                <CheckButton fx:id="checkModoOscuro" text="Modo Oscuro" />
+            
+                <CheckButton fx:id="checkSonido" text="Activar Sonidos" />
+            </children>
+        </VBox>
+      
+        <VBox layoutX="370.0" layoutY="90.0" spacing="15.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
+            <children>
+                <Label text="Seleccionar Tema" textFill="#34495e">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+            
+                <RadialButtonCustom fx:id="radioTemaAzul" text="Tema Azul Océano" />
+            
+                <RadialButtonCustom fx:id="radioTemaVerde" text="Tema Verde Bosque" />
+            
+                <RadialButtonCustom fx:id="radioTemaRojo" text="Tema Rojo Atardecer" />
+            </children>
+        </VBox>
+      
+        <VBox layoutX="50.0" layoutY="345.0" prefHeight="140.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #ecf0f1; -fx-padding: 15; -fx-background-radius: 10;">
+            <children>
+                <Label text="Estado de Configuración" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            
+                <Label fx:id="lblConfiguracion" text="Configuración actual..." textFill="#7f8c8d" wrapText="true" />
+            </children>
+        </VBox>
+      
+        <VBox layoutX="50.0" layoutY="480.0" prefWidth="600.0" spacing="10.0">
+            <children>
+                <Label text="Progreso de Guardado" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            
+                <BarraProgreso fx:id="barraProgreso" prefWidth="600.0" />
+            
+                <Label fx:id="lblEstado" text="Listo para guardar" textFill="#27ae60" />
+            </children>
+        </VBox>
+      
+              <HBox layoutX="342.0" layoutY="539.0" spacing="20.0">
+            <children>
+                <Joseboton fx:id="btnGuardar" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="Guardar Cambios" />
+            
+                      <Joseboton fx:id="btnRestaurar" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Restaurar Defecto" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
