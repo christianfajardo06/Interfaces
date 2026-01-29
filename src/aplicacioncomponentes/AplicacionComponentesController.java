@@ -5,7 +5,7 @@ import checkbutton.CheckButton;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import joseboton.Joseboton;
+import chrisboton.Chrisboton;
 import radialbuttoncustom.RadialButtonCustom;
 
 import java.net.URL;
@@ -31,13 +31,13 @@ public class AplicacionComponentesController implements Initializable {
     @FXML private Label lblEstado;
 
     // Botones
-    @FXML private Joseboton btnGuardar;
-    @FXML private Joseboton btnRestaurar;
+    @FXML private Chrisboton btnChris;       // Guardar
+    @FXML private Chrisboton btnRestaurar;   // Restaurar
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        // TODO DESACTIVADO AL ARRANCAR
+        // Inicializar checkbuttons y radios
         checkNotificaciones.setSelected(false);
         checkModoOscuro.setSelected(false);
         checkSonido.setSelected(false);
@@ -51,6 +51,18 @@ public class AplicacionComponentesController implements Initializable {
         lblEstado.setText("Configuración sin guardar");
         lblEstado.setStyle("-fx-text-fill: #7f8c8d;");
 
+        // Inicializar botones
+        btnChris.setText("Guardar");
+        btnChris.setStyle("-fx-background-color: #28a745; -fx-text-fill: white;");
+
+        btnRestaurar.setText("Restaurar");
+        btnRestaurar.setVisible(false);
+        btnRestaurar.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;");
+
+        // Hover azul oscuro para Restaurar
+        btnRestaurar.setOnMouseEntered(e -> btnRestaurar.setStyle("-fx-background-color: #0056b3; -fx-text-fill: white;"));
+        btnRestaurar.setOnMouseExited(e -> btnRestaurar.setStyle("-fx-background-color: #007bff; -fx-text-fill: white;"));
+
         configurarEventos();
         actualizarTextoConfiguracion();
     }
@@ -58,10 +70,39 @@ public class AplicacionComponentesController implements Initializable {
     // Eventos
     private void configurarEventos() {
 
-        btnGuardar.setOnAction(e -> guardarConfiguracion());
+        // Guardar configuración
+        btnChris.setOnAction(e -> {
+            guardarConfiguracion();
 
-        btnRestaurar.setOnAction(e -> restaurarConfiguracion());
+            // Mostrar botón azul Restaurar y forzar estilo
+            btnRestaurar.setVisible(true);
+            btnRestaurar.setText("Restaurar");
+            btnRestaurar.setStyle(
+                "-fx-background-color: #007bff;" +   // Azul
+                "-fx-text-fill: white;" +
+                "-fx-border-color: #0056b3;" +
+                "-fx-border-width: 1;" +
+                "-fx-background-radius: 5;" +
+                "-fx-border-radius: 5;"
+            );
 
+            // Hover azul oscuro
+            btnRestaurar.setOnMouseEntered(ev -> 
+                btnRestaurar.setStyle("-fx-background-color: #0056b3; -fx-text-fill: white; -fx-border-color: #0056b3; -fx-border-width: 1; -fx-background-radius: 5; -fx-border-radius: 5;")
+            );
+            btnRestaurar.setOnMouseExited(ev -> 
+                btnRestaurar.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-border-color: #0056b3; -fx-border-width: 1; -fx-background-radius: 5; -fx-border-radius: 5;")
+            );
+        });
+
+        // Restaurar configuración
+        btnRestaurar.setOnAction(e -> {
+            restaurarConfiguracion();
+            // Ocultar Restaurar
+            btnRestaurar.setVisible(false);
+        });
+
+        // Listeners de los check y radio
         checkNotificaciones.setOnAction(e -> actualizarTextoConfiguracion());
         checkModoOscuro.setOnAction(e -> actualizarTextoConfiguracion());
         checkSonido.setOnAction(e -> actualizarTextoConfiguracion());
@@ -76,7 +117,7 @@ public class AplicacionComponentesController implements Initializable {
 
         barraProgreso.setProgress(0);
         lblEstado.setText("Guardando configuración...");
-        lblEstado.setStyle("-fx-text-fill: #2980b9;");
+        lblEstado.setStyle("-fx-text-fill: #2980b9;"); // Azul mientras guarda
 
         new Thread(() -> {
             try {
@@ -91,7 +132,7 @@ public class AplicacionComponentesController implements Initializable {
 
                 javafx.application.Platform.runLater(() -> {
                     lblEstado.setText("Configuración guardada correctamente");
-                    lblEstado.setStyle("-fx-text-fill: #27ae60;");
+                    lblEstado.setStyle("-fx-text-fill: #27ae60;"); // Verde al finalizar
                 });
 
             } catch (InterruptedException ex) {
@@ -121,7 +162,6 @@ public class AplicacionComponentesController implements Initializable {
 
         actualizarTextoConfiguracion();
     }
-
 
     // Texto estado           
     private void actualizarTextoConfiguracion() {

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 /**
  * Aplicación de Configuración de Perfil
- * Utiliza componentes personalizados: BarraProgreso, CheckButton, RadialButtonCustom y Joseboton
+ * Utiliza componentes personalizados: BarraProgreso, CheckButton, RadialButtonCustom y chrisboton
  * @author Alumno
  */
 public class AplicacionComponentes extends Application {
